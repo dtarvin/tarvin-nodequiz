@@ -1,0 +1,77 @@
+<mat-toolbar class="menu" role="header" color="primary">
+  <mat-toolbar-row>
+    <button mat-button class="toolbar__icon-button mat-button">
+      <mat-icon>web</mat-icon>
+      <span style="margin-left: 5px !important">NodeQuiz</span>
+    </button>
+    <button mat-button class="mat-button" (click)="goToDashboard()">
+      Dashboard
+    </button>
+    <button mat-button class="mat-button">
+      About
+    </button>
+    <button mat-button class="mat-button">
+      Contact Us
+    </button>
+    <button (click)="logout()" mat-button class="mat-button">
+      Logout
+    </button>
+
+    <div fxFlex></div>
+
+    <!-- User Profile -->
+    <!-- <button class="toolbar__icon-button" [matMenuTriggerFor]="menu" mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>perm_contact_calendar</mat-icon>
+        <span>My Profile</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button (click)="logout()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu> -->
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- <mat-sidenav-container class="all-wrap">
+  <mat-sidenav>
+    <mat-list>
+      <mat-list-item>List Item 1</mat-list-item>
+      <mat-list-item>List Item 1</mat-list-item>
+      <mat-list-item>List Item 1</mat-list-item>
+      <mat-list-item>List Item 1</mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+</mat-sidenav-container> -->
+  <!-- <mat-sidenav-content class="page-wrap">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span>
+          <mat-icon>
+            menu
+          </mat-icon>
+        </span>
+        <span><h1>Toolbar</h1></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <main class="content"> -->
+      <div><router-outlet></router-outlet></div>
+    <!-- </main> -->
+    <!-- <footer> -->
+      <mat-toolbar color="primary">
+          <small><p>Powered by MongoDB, Express, Angular, and Node.js<br/>© 2019 Copyright:
+            Tarvin Labs</p></small>
+      </mat-toolbar>
+
+    <!-- </footer> -->
+  <!-- </mat-sidenav-content> -->
+
+
+
