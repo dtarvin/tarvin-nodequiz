@@ -144,14 +144,14 @@ app.get('api/quizzes/:name', function(req, res, next) {
 /*************** Quiz Results API *******************************************/
 
 // Create Quiz Result
-app.post('/api/results', function(req, res, next) {
-  const result = {
+app.post('/api/quizResults', function(req, res, next) {
+  const quizResult = {
     employeeId: req.body.employeeId,
     quizId: req.body.quizId,
     result: req.body.result
   };
 
-  Result.create(result, function(err, results) {
+  QuizResult.create(result, function(err, results) {
     if (err) {
       console.log(err);
       return next(err);
@@ -171,7 +171,7 @@ app.post('/api/results', function(req, res, next) {
 //   response.redirect("/");
 // });
 /**
- * Creates an express server and listens on port 3000
+ * Creates an express server and listens on server port or port 3000
  */
 http.createServer(app).listen(serverPort, function() {
   console.log(`Application started and listing on port: ${serverPort}`);
