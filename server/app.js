@@ -145,13 +145,13 @@ app.get('api/quizzes/:name', function(req, res, next) {
 
 // Create Quiz Result
 app.post('/api/quizResults/:quizName', function(req, res, next) {
-  const quizResult = {
+  const quizResults = {
     employeeId: req.body.employeeId,
     quizName: req.body.quizName,
     result: req.body.result
   };
 
-  QuizResult.create(quizResult, function(err, results) {
+  QuizResult.create(quizResults, function(err, results) {
     if (err) {
       console.log(err);
       return next(err);
