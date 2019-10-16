@@ -144,10 +144,10 @@ app.get('api/quizzes/:name', function(req, res, next) {
 /*************** Quiz Results API *******************************************/
 
 // Create Quiz Result
-app.post('/api/quizResults', function(req, res, next) {
+app.post('/api/quizResults/:quizName', function(req, res, next) {
   const quizResult = {
     employeeId: req.body.employeeId,
-    quizId: req.body.quizId,
+    quizName: req.body.quizName,
     result: req.body.result
   };
 

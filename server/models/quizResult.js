@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
 
 const QuizResultsSchema = new Schema({
   employeeId: {type: String},
-  quizId: {type: String},
+  quizName: {type: String},
   result: {type: String}
 })
 

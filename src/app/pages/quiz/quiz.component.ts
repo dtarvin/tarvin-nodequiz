@@ -35,6 +35,7 @@ export class QuizComponent implements OnInit {
   employeeId: string;
   quizResults: any;
   displayResults: any;
+  result: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient,
     private quizService: QuizService, private cookieService: CookieService,
@@ -100,7 +101,7 @@ export class QuizComponent implements OnInit {
     this.quizResults = form;
     this.quizResults['employeeId'] = this.employeeId; // add the employeeId to the quizResults object
     this.quizResults['quizName'] = this.quizName; // add the quizName to the quizResults object
-
+    
     /**
      * 1. TODO: Save the quiz results to the database here...
      */
