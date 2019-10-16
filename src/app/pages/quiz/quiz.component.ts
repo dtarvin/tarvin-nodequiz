@@ -83,7 +83,7 @@ export class QuizComponent implements OnInit {
      * Variables for setting up our scoring calculation
      */
     const totalPossiblePoints = 100; // the total number of possible points a user can earn on a given test
-    const questionCount = this.quiz.questions.length; // the total number of quiz questions
+    const questionCount = this.questions.length; // the total number of quiz questions
     let pointsPerQuestion = totalPossiblePoints / questionCount; // the total number of poiints per question
     let quizScore = 0; // variable to hold the quiz score
 
