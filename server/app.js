@@ -16,6 +16,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const Quiz = require('./models/quiz');
+const QuizResult = require('./models/quizResult');
 const config = require('./helpers/config');
 
 let app = express();
@@ -110,6 +111,35 @@ app.get('api/quizzes/:name', function(req, res, next) {
   })
 })
 
+/*************** Quiz Results API *******************************************/
+
+// Create Quiz Result
+app.post('/api/quizResults/:quizName', function(req, res, next) {
+  const quizResults = {
+    employeeId: req.body.employeeId,
+    quizName: req.body.quizName,
+    result: req.body.result
+  };
+
+  QuizResult.create(quizResults, function(err, results) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    } else {
+      console.log(results);
+      res.json(results);
+    }
+  });
+});
+
+/**
+ * Creates an express server and listens on server port or port 3000
+ */
+http.createServer(app).listen(serverPort, function() {
+  console.log(`Application started and listing on port: ${serverPort}`);
+});
+
+
 // app.get('/api/quizzes/:id', function(req, res, next) {
 //   Quiz.findOne({'quizId': req.params.id}, function(err, quiz) {
 //     if (err) {
@@ -141,28 +171,6 @@ app.get('api/quizzes/:name', function(req, res, next) {
 //   }
 // })
 
-/*************** Quiz Results API *******************************************/
-
-// Create Quiz Result
-app.post('/api/quizResults/:quizName', function(req, res, next) {
-  const quizResults = {
-    employeeId: req.body.employeeId,
-    quizName: req.body.quizName,
-    result: req.body.result
-  };
-
-  QuizResult.create(quizResults, function(err, results) {
-    if (err) {
-      console.log(err);
-      return next(err);
-    } else {
-      console.log(results);
-      res.json(results);
-    }
-  });
-});
-
-
 //   const newEmployee = new Employee({ firstName, lastName });
 //   newEmployee.save(function(error) {
 //     if (error) throw error;
@@ -170,9 +178,3 @@ app.post('/api/quizResults/:quizName', function(req, res, next) {
 //   });
 //   response.redirect("/");
 // });
-/**
- * Creates an express server and listens on server port or port 3000
- */
-http.createServer(app).listen(serverPort, function() {
-  console.log(`Application started and listing on port: ${serverPort}`);
-});
