@@ -120,67 +120,67 @@ export class QuizComponent implements OnInit {
     /**
      * 2. Loop over the quizResults properties
      */
-    // for (const prop in this.quizResults) {
+    for (const prop in this.quizResults) {
       /**
        * We need to check if hasOwnProperty to avoid returning null values
        */
-      // if (this.quizResults.hasOwnProperty(prop)) {
+      if (this.quizResults.hasOwnProperty(prop)) {
 
         /**
          * Once we are inside the object's properties we need to extract the properties not matching quizName and employeeId
-    //      */
-    //     if (prop !== 'employeeId' && prop !== 'quizName') {
-    //       selectedAnswerIds.push(this.quizResults[prop].split(';')[0]);
-    //       selectedIsCorrectProp.push(this.quizResults[prop].split(';')[1]);
-    //     }
-    //   }
-    // }
+         */
+        if (prop !== 'employeeId' && prop !== 'quizName') {
+          selectedAnswerIds.push(this.quizResults[prop].split(';')[0]);
+          selectedIsCorrectProp.push(this.quizResults[prop].split(';')[1]);
+        }
+      }
+    }
 
     /**
      * 3. Determine the quiz score
      * With the properties extracted and pushed to our selectedAnswerIds and selectedIsCorrectProp arrays,
      * we need to get a running total of the entries matching 'true'
      */
-    // for (let x = 0; x < selectedIsCorrectProp.length; x++) {
-    //   if (selectedIsCorrectProp[x] === "true") {
-    //     correctRunningTotal += 1;
-    //   }
-    // }
+    for (let x = 0; x < selectedIsCorrectProp.length; x++) {
+      if (selectedIsCorrectProp[x] === "true") {
+        correctRunningTotal += 1;
+      }
+    }
 
-    // quizScore = correctRunningTotal * pointsPerQuestion;
+    quizScore = correctRunningTotal * pointsPerQuestion;
 
     /**
      * 4. Create the QuizSummary object for the dialog
      */
-    // let correctAnswers = [];
-    // let selectedAnswers = [];
+    let correctAnswers = [];
+    let selectedAnswers = [];
 
     /**
      * Loop over the quiz.questions to get the selected answer and correct answer for each question
     //  */
-    // for (let question of this.questions) {
-    //   for (let answer of question.answers) {
-    //     if (answer.isCorrect) {
-    //       correctAnswers.push({
-    //         questionId: question._id,
-    //         questionText: question.questionText,
-    //         answerId: answer._id,
-    //         text: answer.answerText
-    //       });
-    //     }
+    for (let question of this.questions) {
+      for (let answer of question.answers) {
+        if (answer.isCorrect) {
+          correctAnswers.push({
+            questionId: question._id,
+            questionText: question.questionText,
+            answerId: answer._id,
+            text: answer.answerText
+          });
+        }
 
-    //     if (selectedAnswerIds.includes(answer._id)) {
-    //       console.log('Includes statement');
-    //       console.log(`Answer: ${answer.answerText}`);
-    //       selectedAnswers.push({
-    //         questionId: question._id,
-    //         questionText: question.questionText,
-    //         answerId: answer._id,
-    //         text: answer.answerText
-    //       });
-    //     }
-    //   }
-    // }
+        if (selectedAnswerIds.includes(answer._id)) {
+          console.log('Includes statement');
+          console.log(`Answer: ${answer.answerText}`);
+          selectedAnswers.push({
+            questionId: question._id,
+            questionText: question.questionText,
+            answerId: answer._id,
+            text: answer.answerText
+          });
+        }
+      }
+    }
 
     // this.quizSummary['quizName'] = this.quizName;
     // this.quizSummary['quizId'] = this.quiz.quizId;
