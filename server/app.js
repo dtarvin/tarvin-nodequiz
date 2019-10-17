@@ -134,7 +134,7 @@ app.post('/api/quizResults/:quizName', function(req, res, next) {
 
 /*************** Cumulative Summary API *************************************/
 
-app.post('/api/cumulativeSummary/:employeeId', function(req, res, next) {
+app.post('/api/cumulativeSummary/', function(req, res, next) {
   const cumulativeSummary = {
     employeeId: req.body.employeeId,
     quizId: req.body.quizId,

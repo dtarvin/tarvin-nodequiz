@@ -36,7 +36,8 @@ export class QuizComponent implements OnInit {
   quizResults: any;
   displayResults: any;
   result: any;
-  quizSummary: any;
+  quizSummary: any = [];
+  cumulativeSummary: object;
 
   constructor(private route: ActivatedRoute, private http: HttpClient,
     private quizService: QuizService, private cookieService: CookieService,
@@ -184,7 +185,7 @@ export class QuizComponent implements OnInit {
     }
 
     this.quizSummary['quizName'] = this.quizName;
-    this.quizSummary['quizId'] = this.quiz.quizId;
+    this.quizSummary['quizId'] = this.quizId;
     this.quizSummary['score'] = quizScore;
     this.quizSummary['correctAnswers'] = correctAnswers;
     this.quizSummary['selectedAnswers'] = selectedAnswers;
@@ -193,21 +194,29 @@ export class QuizComponent implements OnInit {
      * 6. TODO: Create the cumulative summary object and insert into the database
      */
 
-    // this.cumulativeSummaryObject = {
-    //   employeeId = this.employeeId,
-    //   quizId = this.quizId,
-    //   quizName = this.quizName,
-    //   dateTaken: moment().format('MM/DD/YYYY'),
-    //    score: (correctRunningTotal * pointsPerQuestion)
-    // };
+    this.cumulativeSummary = {
+      employeeId: this.employeeId,
+      quizId: this.quizId,
+      quizName: this.quizName,
+      dateTaken: moment().format('MM/DD/YYYY'),
+      score: (correctRunningTotal * pointsPerQuestion)
+    };
 
-    // this.http.post('', body: {}).subscribe(res => {
+    this.http.post('/api/cumulativeSummary/', {
+      employeeId: this.cumulativeSummary['employeeId'],
+      quizId: this.cumulativeSummary['quizId'],
+      quizName: this.cumulativeSummary['quizName'],
+      dateTaken: this.cumulativeSummary['dateTaken'],
+      score: this.cumulativeSummary['score']
+    }).subscribe(res => {
 
-    // }, err => {
+    }, err => {
 
-    // }, () => {
+    }, () => {
 
-    // })
+    })
+
+    this.show();
 
     /**
      * 7. Open the dialog and pass the summary details to over
