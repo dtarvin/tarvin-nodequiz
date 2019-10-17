@@ -132,6 +132,28 @@ app.post('/api/quizResults/:quizName', function(req, res, next) {
   });
 });
 
+/*************** Cumulative Summary API *************************************/
+
+app.post('/api/cumulativeSummary/:employeeId', function(req, res, next) {
+  const cumulativeSummary = {
+    employeeId: req.body.employeeId,
+    quizId: req.body.quizId,
+    quizName: req.body.quizName,
+    dateTaken: req.body.dateTaken,
+    score: req.body.score
+  };
+
+  CumulativeSummary.create(cumulativeSummary, function(err, quizSummary) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    } else {
+      console.log(quizSummary);
+      res.json(quizSummary);
+    }
+  });
+});
+
 /**
  * Creates an express server and listens on server port or port 3000
  */

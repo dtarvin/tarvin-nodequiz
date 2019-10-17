@@ -36,6 +36,7 @@ export class QuizComponent implements OnInit {
   quizResults: any;
   displayResults: any;
   result: any;
+  quizSummary: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient,
     private quizService: QuizService, private cookieService: CookieService,
@@ -182,11 +183,11 @@ export class QuizComponent implements OnInit {
       }
     }
 
-    // this.quizSummary['quizName'] = this.quizName;
-    // this.quizSummary['quizId'] = this.quiz.quizId;
-    // this.quizSummary['score'] = quizScore;
-    // this.quizSummary['correctAnswers'] = correctAnswers;
-    // this.quizSummary['selectedAnswers'] = selectedAnswers;
+    this.quizSummary['quizName'] = this.quizName;
+    this.quizSummary['quizId'] = this.quiz.quizId;
+    this.quizSummary['score'] = quizScore;
+    this.quizSummary['correctAnswers'] = correctAnswers;
+    this.quizSummary['selectedAnswers'] = selectedAnswers;
 
     /**
      * 6. TODO: Create the cumulative summary object and insert into the database
