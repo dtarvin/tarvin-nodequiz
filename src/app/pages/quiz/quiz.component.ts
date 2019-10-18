@@ -37,30 +37,31 @@ export class QuizComponent implements OnInit {
   displayResults: any;
   result: any;
   quizSummary: any = [];
-  cumulativeSummary: object;
+  cumulativeSummary: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient,
     private quizService: QuizService, private cookieService: CookieService,
     private location: Location, private router: Router) {
       this.quizName = route.snapshot.paramMap.get('name');
       this.employeeId = this.cookieService.get('employeeId');
-      console.log('The quiz name is ', this.quizName);
+      // console.log('The quiz name is ', this.quizName);
       // this.quizId = parseInt(this.route.snapshot.paramMap.get('quizId'), 10);
       // this.employeeId = parseInt(this.cookieService.get('employeeId'), 10);
-      console.log('Running getQuizzes from component');
+      // console.log('Running getQuizzes from component');
       this.quizService.getQuizzes()
       .subscribe(res => {
         this.quizzes = res;
-        console.log('The quizzes are as follows:', this.quizzes);
+        // console.log('The quizzes are as follows:', this.quizzes);
         this.questions = this.quizzes.filter(q => q.name === this.quizName)[0].questions;
-        // this.quiz = this.quizzes.filter(q => q.quizId === this.quizId)[0];
-        console.log(this.questions);
+        this.quiz = this.quizzes.filter(q => q.name === this.quizName)[0];
+        // console.log(this.questions);
+        // console.log('Quiz ID is ' + this.quiz.quizId);
       })
   }
 
   goToQuiz(quizName) {
     this.quizName = quizName;
-    console.log('The quiz name is ' + this.quizName);
+    // console.log('The quiz name is ' + this.quizName);
     this.router.navigate(['/dashboard/quizzes/' + this.quizName]);
   }
 
@@ -132,9 +133,12 @@ export class QuizComponent implements OnInit {
          * Once we are inside the object's properties we need to extract the properties not matching quizName and employeeId
          */
         if (prop !== 'employeeId' && prop !== 'quizName') {
-          selectedAnswerIds.push(this.quizResults[prop].split(';')[0]);
-          selectedIsCorrectProp.push(this.quizResults[prop].split(';')[1]);
+          // console.log('this.quizResults[prop].split(;)[1] is ', this.quizResults[prop].split(';')[1]);
+          selectedAnswerIds.push(this.quizResults[prop].split(';')[1]);
+          // console.log("this.quizResults[prop].split(';')[1] =", this.quizResults[prop].split(';')[1]);
+          selectedIsCorrectProp.push(this.quizResults[prop].split(';')[3]);
         }
+        // console.log('Selected Answer Ids include ', selectedAnswerIds);
       }
     }
 
@@ -162,59 +166,59 @@ export class QuizComponent implements OnInit {
     //  */
     for (let question of this.questions) {
       for (let answer of question.answers) {
+        console.log('answer.answerId is ', answer.answerId);
         if (answer.isCorrect) {
+          console.log(answer.answerId + ' was correct');
           correctAnswers.push({
-            questionId: question._id,
+            questionId: question.questionId,
             questionText: question.questionText,
-            answerId: answer._id,
+            answerId: answer.answerId,
             text: answer.answerText
           });
         }
-
-        if (selectedAnswerIds.includes(answer._id)) {
+        console.log('answer.answerId is still ', answer.answerId);
+        if (selectedAnswerIds.includes(answer.answerId)) {
           console.log('Includes statement');
           console.log(`Answer: ${answer.answerText}`);
           selectedAnswers.push({
-            questionId: question._id,
+            questionId: question.questionId,
             questionText: question.questionText,
-            answerId: answer._id,
+            answerId: answer.answerId,
             text: answer.answerText
           });
         }
+        console.log('done with ', answer.answerId);
       }
     }
 
+    this.quizSummary['employeeId'] = this.employeeId;
     this.quizSummary['quizName'] = this.quizName;
     this.quizSummary['quizId'] = this.quizId;
+
     this.quizSummary['score'] = quizScore;
     this.quizSummary['correctAnswers'] = correctAnswers;
     this.quizSummary['selectedAnswers'] = selectedAnswers;
+    console.log('Quiz summary = ', this.quizSummary);
 
     /**
      * 6. TODO: Create the cumulative summary object and insert into the database
      */
 
-    this.cumulativeSummary = {
-      employeeId: this.employeeId,
-      quizId: this.quizId,
-      quizName: this.quizName,
-      dateTaken: moment().format('MM/DD/YYYY'),
-      score: (correctRunningTotal * pointsPerQuestion)
-    };
+    // this.cumulativeSummary = {
+    //   employeeId: this.employeeId,
+    //   quizId: this.quizId,
+    //   quizName: this.quizName,
+    //   dateTaken: moment().format('MM/DD/YYYY'),
+    //   score: (correctRunningTotal * pointsPerQuestion)
+    // };
 
-    this.http.post('/api/cumulativeSummary/', {
-      employeeId: this.cumulativeSummary['employeeId'],
-      quizId: this.cumulativeSummary['quizId'],
-      quizName: this.cumulativeSummary['quizName'],
-      dateTaken: this.cumulativeSummary['dateTaken'],
-      score: this.cumulativeSummary['score']
-    }).subscribe(res => {
+    // this.http.post('/api/cumulativeSummary/', this.cumulativeSummary).subscribe(res => {
 
-    }, err => {
+    // }, err => {
 
-    }, () => {
+    // }, () => {
 
-    })
+    // })
 
     this.show();
 

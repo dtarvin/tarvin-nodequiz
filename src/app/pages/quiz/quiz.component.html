@@ -5,7 +5,7 @@
     </mat-card-title>
       <div *ngIf="isShown == true">
         <h1>Results</h1>
-        <p *ngIf="quizResults">{{ quizSummary }}</p>
+        <p *ngIf="quizResults">{{ displayResults }}</p>
       </div>
     <br>
     <!-- root mat card content -->
@@ -34,7 +34,7 @@
                     <label>Answers:</label>
                     <div fxLayout="column" fxLayoutGap="10px">
                       <div *ngFor="let answer of question.answers" style="flex-direction: column;">
-                        <input [(ngModel)]="qs[question.questionNumber]" [checked]="qs[question.questionNumber]" value="{{question.questionNumer}};{{answer.answerText}};{{answer.isCorrect}}" name="q{{question.questionNumber}}" type="radio" />
+                        <input [(ngModel)]="qs[question.questionNumber]" [checked]="qs[question.questionNumber]" value="{{question.questionNumber}};{{answer.answerId}};{{answer.answerText}};{{answer.isCorrect}}" name="q{{question.questionNumber}}" type="radio" />
                           {{answer.answerText}}
                       </div>
                     </div>
