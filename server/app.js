@@ -134,8 +134,8 @@ app.post('/api/quizResults/:quizName', function(req, res, next) {
 
 /*************** Completed Quizzes API *************************************/
 
-app.post('/api/completedQuizzes/:quizName', function(req, res, next) {
-  const completedQuizzes = {
+app.post('/api/completedQuizzes', function(req, res, next) {
+  const completedQuiz = {
     employeeId: req.body.employeeId,
     quizId: req.body.quizId,
     quizName: req.body.quizName,
@@ -143,7 +143,7 @@ app.post('/api/completedQuizzes/:quizName', function(req, res, next) {
     score: req.body.score
   };
 
-  CompletedQuiz.create(completedQuizzes, function(err, quizSummary) {
+  CompletedQuiz.create(completedQuiz, function(err, quizSummary) {
     if (err) {
       console.log(err);
       return next(err);

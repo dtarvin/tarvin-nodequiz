@@ -212,12 +212,12 @@ export class QuizComponent implements OnInit {
       score: quizScore
     };
 
-    this.http.post('/api/completedQuizzes/' + this.quizName, {
-      employeeId: this.completedQuiz.employeeId,
-      quizId: this.completedQuiz.quizId,
-      quizName: this.completedQuiz.quizName,
-      dateTaken: this.completedQuiz.dateTaken,
-      score: this.completedQuiz.score
+    this.http.post('/api/completedQuizzes/', {
+      employeeId: this.completedQuiz['employeeId'],
+      quizId: this.completedQuiz['quidId'],
+      quizName: this.completedQuiz['quizName'],
+      dateTaken: this.completedQuiz['dateTaken'],
+      score: this.completedQuiz['score']
     }).subscribe(res => {
 
     }, err => {
