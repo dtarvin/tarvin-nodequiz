@@ -132,10 +132,10 @@ app.post('/api/quizResults/:quizName', function(req, res, next) {
   });
 });
 
-/*************** Cumulative Summary API *************************************/
+/*************** Completed Quizzes API *************************************/
 
-app.post('/api/cumulativeSummary/', function(req, res, next) {
-  const cumulativeSummary = {
+app.post('/api/completedQuizzes/:quizName', function(req, res, next) {
+  const completedQuizzes = {
     employeeId: req.body.employeeId,
     quizId: req.body.quizId,
     quizName: req.body.quizName,
@@ -143,13 +143,13 @@ app.post('/api/cumulativeSummary/', function(req, res, next) {
     score: req.body.score
   };
 
-  CumulativeSummary.create(cumulativeSummary, function(err, quizSummary) {
+  CompletedQuiz.create(completedQuizzes, function(err, quizSummary) {
     if (err) {
       console.log(err);
       return next(err);
     } else {
-      console.log(quizSummary);
-      res.json(quizSummary);
+      console.log(completedQuizzes);
+      res.json(completedQuizzes);
     }
   });
 });

@@ -11,18 +11,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CompletedQuizSchema = new Schema({
-    employeeId: String,
+    employeeId: {type: String},
     quizId: {type: Number},
-    q1: String,
-    q2: String,
-    q3: String,
-    q4: String,
-    q5: String,
-    q6: String,
-    q7: String,
-    q8: String,
-    q9: String,
-    q10: String
+    quizName: {type: String},
+    dateTaken: {type: String},
+    score: {type: Number}
 });
 
 module.exports = mongoose.model('CompletedQuiz', CompletedQuizSchema);
