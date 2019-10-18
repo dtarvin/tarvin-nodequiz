@@ -16,10 +16,12 @@ const QuizSchema = new Schema({
     questions: [{
         questionNumber: {type: Number},
         questionText: {type: String},
+        questionId: {type: Number},
         answers: [{
             answerLetter: {type: String},
             answerText: {type: String},
-            isCorrect: {type: Boolean}
+            isCorrect: {type: Boolean},
+            answerId: {type: Number}
         }]
     }]
 })

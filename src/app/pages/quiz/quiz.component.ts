@@ -134,7 +134,7 @@ export class QuizComponent implements OnInit {
          */
         if (prop !== 'employeeId' && prop !== 'quizName') {
           // console.log('this.quizResults[prop].split(;)[1] is ', this.quizResults[prop].split(';')[1]);
-          selectedAnswerIds.push(this.quizResults[prop].split(';')[1]);
+          selectedAnswerIds.push(parseInt(this.quizResults[prop].split(';')[1]));
           // console.log("this.quizResults[prop].split(';')[1] =", this.quizResults[prop].split(';')[1]);
           selectedIsCorrectProp.push(this.quizResults[prop].split(';')[3]);
         }
@@ -166,9 +166,9 @@ export class QuizComponent implements OnInit {
     //  */
     for (let question of this.questions) {
       for (let answer of question.answers) {
-        console.log('answer.answerId is ', answer.answerId);
+        // console.log('answer.answerId is ', answer.answerId);
         if (answer.isCorrect) {
-          console.log(answer.answerId + ' was correct');
+          // console.log(answer.answerId + ' was correct');
           correctAnswers.push({
             questionId: question.questionId,
             questionText: question.questionText,
@@ -176,7 +176,8 @@ export class QuizComponent implements OnInit {
             text: answer.answerText
           });
         }
-        console.log('answer.answerId is still ', answer.answerId);
+        // console.log('answer.answerId is still ', answer.answerId);
+        // console.log('selectedAnswerIds.includes(answer.answerId) = ', selectedAnswerIds.includes(answer.answerId));
         if (selectedAnswerIds.includes(answer.answerId)) {
           console.log('Includes statement');
           console.log(`Answer: ${answer.answerText}`);
@@ -193,7 +194,7 @@ export class QuizComponent implements OnInit {
 
     this.quizSummary['employeeId'] = this.employeeId;
     this.quizSummary['quizName'] = this.quizName;
-    this.quizSummary['quizId'] = this.quizId;
+    this.quizSummary['quizId'] = this.quiz.quizId;
 
     this.quizSummary['score'] = quizScore;
     this.quizSummary['correctAnswers'] = correctAnswers;
@@ -204,21 +205,27 @@ export class QuizComponent implements OnInit {
      * 6. TODO: Create the cumulative summary object and insert into the database
      */
 
-    // this.cumulativeSummary = {
-    //   employeeId: this.employeeId,
-    //   quizId: this.quizId,
-    //   quizName: this.quizName,
-    //   dateTaken: moment().format('MM/DD/YYYY'),
-    //   score: (correctRunningTotal * pointsPerQuestion)
-    // };
+    this.cumulativeSummary = {
+      employeeId: this.employeeId,
+      quizId: this.quiz.quizId,
+      quizName: this.quizName,
+      dateTaken: moment().format('MM/DD/YYYY'),
+      score: quizScore
+    };
 
-    // this.http.post('/api/cumulativeSummary/', this.cumulativeSummary).subscribe(res => {
+    this.http.post('/api/cumulativeSummary/', {
+      employeeId: this.cumulativeSummary['employeeId'],
+      quizId: this.cumulativeSummary['quizId'],
+      quizName: this.cumulativeSummary['quizName'],
+      dateTaken: this.cumulativeSummary['dateTaken'],
+      score: this.cumulativeSummary['score']
+    }).subscribe(res => {
 
-    // }, err => {
+    }, err => {
 
-    // }, () => {
+    }, () => {
 
-    // })
+    })
 
     this.show();
 
