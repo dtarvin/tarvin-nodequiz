@@ -37,4 +37,7 @@ export class AppComponent {
   goToDashboard() {
     this.router.navigate(['/dashboard/']);
   }
- }
+  goToCumulativeSummary() {
+    this.router.navigate(['/dashboard/cumulative-summary']);
+  }
+}

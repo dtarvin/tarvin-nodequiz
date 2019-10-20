@@ -17,6 +17,7 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 const Quiz = require('./models/quiz');
 const QuizResult = require('./models/quizResult');
+const CompletedQuiz = require('./models/completedQuiz');
 const config = require('./helpers/config');
 
 let app = express();
@@ -60,8 +61,8 @@ app.post('/api/users', function(req, res, next) {
       console.log(users);
       res.json(users);
     }
-  })
-})
+  });
+});
 
 app.get('/api/users', function(req, res, next) {
   User.find({}, function(err, users) {
@@ -72,8 +73,8 @@ app.get('/api/users', function(req, res, next) {
       console.log(users);
       res.json(users);
     }
-  })
-})
+  });
+});
 
 app.get('/api/users/:id', function(req, res, next) {
   User.findOne({'employeeId':req.params.id}, function(err, users) {
@@ -84,8 +85,8 @@ app.get('/api/users/:id', function(req, res, next) {
       console.log(users);
       res.json(users);
     }
-  })
-})
+  });
+});
 
 app.get('/api/quizzes', function(req, res, next) {
   Quiz.find({}, function(err, quizzes) {
@@ -96,8 +97,8 @@ app.get('/api/quizzes', function(req, res, next) {
       console.log(quizzes);
       res.json(quizzes);
     }
-  })
-})
+  });
+});
 
 app.get('api/quizzes/:name', function(req, res, next) {
   Quiz.findOne({'quizName':req.params.name}, function(err, quizzes) {
@@ -108,8 +109,8 @@ app.get('api/quizzes/:name', function(req, res, next) {
       console.log(quizzes);
       res.json(quizzes);
     }
-  })
-})
+  });
+});
 
 /*************** Quiz Results API *******************************************/
 
@@ -143,7 +144,19 @@ app.post('/api/completedQuizzes', function(req, res, next) {
     score: req.body.score
   };
 
-  CompletedQuiz.create(completedQuiz, function(err, quizSummary) {
+  CompletedQuiz.create(completedQuiz, function(err, completedQuizzes) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    } else {
+      console.log(completedQuizzes);
+      res.json(completedQuizzes);
+    }
+  });
+});
+
+app.get('/api/completedQuizzes', function(req, res, next) {
+  Quiz.find({}, function(err, completedQuizzes) {
     if (err) {
       console.log(err);
       return next(err);

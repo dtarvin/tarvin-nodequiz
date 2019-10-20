@@ -40,6 +40,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CarouselModule } from 'primeng/carousel';
 import { PresentationComponent } from './pages/presentation/presentation.component';
@@ -47,6 +48,11 @@ import { PresentationService } from './pages/presentation/presentation.service';
 import { QuizComponent } from './pages/quiz/quiz.component';
 import { QuizService } from './pages/quiz/quiz.service';
 import { QuizResultsComponent } from './pages/quiz-results/quiz-results.component';
+import { QuizSummaryDialogComponent } from './shared/quiz-summary-dialog/quiz-summary-dialog.component';
+import { CumulativeSummaryService } from './pages/cumulative-summary/cumulative-summary.service';
+import { MatPaginatorModule,
+         MatProgressSpinnerModule,
+         MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -59,7 +65,8 @@ import { QuizResultsComponent } from './pages/quiz-results/quiz-results.componen
     AuthLayoutComponent,
     PresentationComponent,
     QuizComponent,
-    QuizResultsComponent
+    QuizResultsComponent,
+    QuizSummaryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -78,12 +85,18 @@ import { QuizResultsComponent } from './pages/quiz-results/quiz-results.componen
     MatListModule,
     MatRadioModule,
     MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
     FlexLayoutModule,
     HttpClientModule,
     CarouselModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
-              AuthGuard, CookieService, PresentationService, QuizService],
+              AuthGuard, CookieService, PresentationService, QuizService,
+              CumulativeSummaryService],
+  entryComponents: [QuizSummaryDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,37 @@
-<p>cumulative-summary works!</p>
+<div class="cumulative-doc">
+    <mat-card class="mat-elevation-z8">
+        <mat-card-title>
+            Cumulative Results
+        </mat-card-title>
+        <table mat-table [datasource]="dataSource" class="mat-elevation-z8">
+            <!-- Employee ID column -->
+            <ng-container matColumnDef="employeeId">
+                <th mat-header-cell *matHeaderCellDef>Employee ID</th>
+                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.employeeId }} </td>
+            </ng-container>
+            <!-- Quiz ID column -->
+            <ng-container matColumnDef="quizId">
+                <th mat-header-cell *matHeaderCellDef>Quiz ID</th>
+                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.quizId }} </td>
+            </ng-container>
+            <!-- Quiz Name column -->
+            <ng-container matColumnDef="quizName">
+                <th mat-header-cell *matHeaderCellDef>Quiz Name</th>
+                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.quizName }} </td>
+            </ng-container>
+            <!-- Date Taken column -->
+            <ng-container matColumnDef="dateTaken">
+                <th mat-header-cell *matHeaderCellDef>Date Taken</th>
+                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.dateTaken }} </td>
+            </ng-container>
+            <!-- Score column -->
+            <ng-container matColumnDef="score">
+                <th mat-header-cell *matHeaderCellDef>Score</th>
+                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.score }} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-card>
+</div>

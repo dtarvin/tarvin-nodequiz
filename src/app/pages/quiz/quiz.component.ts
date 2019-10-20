@@ -15,6 +15,7 @@ import { QuizService } from './quiz.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
+import { QuizSummaryDialogComponent} from '../../shared/quiz-summary-dialog/quiz-summary-dialog.component';
 
 @Component({
   selector: 'app-quiz',
@@ -41,7 +42,7 @@ export class QuizComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpClient,
     private quizService: QuizService, private cookieService: CookieService,
-    private location: Location, private router: Router) {
+    private location: Location, private router: Router, private dialog: MatDialog) {
       this.quizName = route.snapshot.paramMap.get('name');
       this.employeeId = this.cookieService.get('employeeId');
       // console.log('The quiz name is ', this.quizName);
@@ -231,19 +232,19 @@ export class QuizComponent implements OnInit {
     /**
      * 7. Open the dialog and pass the summary details to over
      */
-  //   const dialogRef = this.dialog.open(QuizResultDialogComponent, {
-  //     data: {
-  //       quizSummary: this.quizSummary
-  //     },
-  //     disableClose: true,
-  //     width: "800px"
-  //   });
+    const dialogRef = this.dialog.open(QuizSummaryDialogComponent, {
+      data: {
+        quizSummary: this.quizSummary
+      },
+      disableClose: true,
+      width: "800px"
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === "confirm") {
-  //       this.router.navigate(['/']);
-  //     }
-  //   });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === "confirm") {
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   ngOnInit() {
