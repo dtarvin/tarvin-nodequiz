@@ -1,0 +1,14 @@
+.cumulativeSummaryPage {
+    width: 80%;
+    /* margin-top: 2%; */
+    margin:0 auto;
+}
+
+.mat-title {
+    text-align: center;
+}
+
+.cumulativeSummaryTable {
+    width: 85%;
+    margin: 0 auto;
+}

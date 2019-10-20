@@ -156,7 +156,7 @@ app.post('/api/completedQuizzes', function(req, res, next) {
 });
 
 app.get('/api/completedQuizzes', function(req, res, next) {
-  Quiz.find({}, function(err, completedQuizzes) {
+  CompletedQuiz.find({}, function(err, completedQuizzes) {
     if (err) {
       console.log(err);
       return next(err);

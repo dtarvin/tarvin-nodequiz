@@ -1,37 +1,28 @@
-<div class="cumulative-doc">
+<div class="cumulativeSummaryPage" fxLayout="column">
     <mat-card class="mat-elevation-z8">
-        <mat-card-title>
-            Cumulative Results
+        <mat-card-title class="mat-title">
+            Completed Quizzes
         </mat-card-title>
-        <table mat-table [datasource]="dataSource" class="mat-elevation-z8">
-            <!-- Employee ID column -->
-            <ng-container matColumnDef="employeeId">
-                <th mat-header-cell *matHeaderCellDef>Employee ID</th>
-                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.employeeId }} </td>
-            </ng-container>
-            <!-- Quiz ID column -->
-            <ng-container matColumnDef="quizId">
-                <th mat-header-cell *matHeaderCellDef>Quiz ID</th>
-                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.quizId }} </td>
-            </ng-container>
-            <!-- Quiz Name column -->
-            <ng-container matColumnDef="quizName">
-                <th mat-header-cell *matHeaderCellDef>Quiz Name</th>
-                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.quizName }} </td>
-            </ng-container>
-            <!-- Date Taken column -->
-            <ng-container matColumnDef="dateTaken">
-                <th mat-header-cell *matHeaderCellDef>Date Taken</th>
-                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.dateTaken }} </td>
-            </ng-container>
-            <!-- Score column -->
-            <ng-container matColumnDef="score">
-                <th mat-header-cell *matHeaderCellDef>Score</th>
-                <td mat-cell *matCellDef="let completedQuiz"> {{ completedQuiz.score }} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <mat-card-content>
+            <div *ngIf="completedQuizzes">
+                <br><br><br>
+                <table class="cumulativeSummaryTable">
+                    <tr>
+                        <th>Employee Id</th>
+                        <th>Quiz ID</th>
+                        <th>Quiz Name</th>
+                        <th>Date Taken</th>
+                        <th>Score</th>
+                    </tr>
+                    <tr *ngFor="let quiz of completedQuizzes">
+                        <td>{{ quiz.employeeId }}</td>
+                        <td>{{ quiz.quizId }}</td>
+                        <td>{{ quiz.quizName }}</td>
+                        <td>{{ quiz.dateTaken }}</td>
+                        <td>{{ quiz.score }}</td>
+                    </tr>
+                </table>
+            </div>
+        </mat-card-content>
     </mat-card>
 </div>
