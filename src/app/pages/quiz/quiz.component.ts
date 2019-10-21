@@ -1,7 +1,8 @@
 /*
 ; ============================================
 ; Title:  quiz.component.ts
-; Author: David Tarvin
+; Author: Richard Krasso
+; Modified by: David Tarvin
 ; Date:   7 Oct 2019
 ; Description: NodeQuiz
 ;=============================================
