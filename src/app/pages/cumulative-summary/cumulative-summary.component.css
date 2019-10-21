@@ -4,11 +4,19 @@
     margin:0 auto;
 }
 
+mat-card {
+    background-color: #9ccc9c;
+}
+
 .mat-title {
     text-align: center;
 }
 
 .cumulativeSummaryTable {
-    width: 85%;
+    width: 60%;
     margin: 0 auto;
+}
+
+td {
+    text-align: center;
 }

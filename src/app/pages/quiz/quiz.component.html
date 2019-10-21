@@ -1,6 +1,6 @@
-<div style="width: 50%; margin-top: 2%; margin-left: 20%;" fxLayout="column">
+<div class="container" fxLayout="column">
   <mat-card class="mat-elevation-z8">
-    <mat-card-title style="text-align: center; font-weight: lighter;" class="mat-headline">
+    <mat-card-title style="text-align: center; font-weight: heavier;" class="mat-headline">
       {{ quizName }}
     </mat-card-title>
       <div *ngIf="isShown == true">
@@ -46,9 +46,16 @@
 
           <!-- mat card actions -->
           <br>
-          <mat-card-actions>
-            <button type="submit" fxFlex mat-raised-button color="warn">Submit</button>
-          </mat-card-actions>
+          <div class="buttons">
+            <mat-card-actions>
+              <button type="submit" mat-raised-button>Submit</button>
+            </mat-card-actions>
+          
+            <mat-card-actions>
+              <button mat-raised-button (click)="goBack()">Return to Presentation</button>
+            </mat-card-actions>
+          </div>
+          
         </form>
         <!-- end form -->
 
@@ -59,8 +66,8 @@
   </mat-card>
   <!-- end root mat card -->
 
-  <br><br><br>
-  <div fxFlex fxLayoutAlign="end" style="width: 50%; margin: 0 auto;">
+  
+  <!-- <div fxFlex fxLayoutAlign="end" style="width: 50%; margin: 0 auto;">
     <button mat-button color="primary" (click)="goBack()">Return to Presentation</button>
-  </div>
+  </div> -->
 </div>

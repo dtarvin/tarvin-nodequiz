@@ -35,7 +35,7 @@ export class QuizSummaryDialogComponent implements OnInit {
   }
 
   returnToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard/']);
   }
 
   ngOnInit() {

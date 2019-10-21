@@ -12,3 +12,8 @@ div.ui-widget-header {
     /* width: 30%; */
     margin: auto;
 }
+
+.carousel {
+    background-color: #9ccc9c;
+    width: 70%;
+}
